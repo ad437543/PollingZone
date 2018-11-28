@@ -77,6 +77,7 @@ public class createAccountActivity extends AppCompatActivity {
                 postData.put("optionalName", "we need this");
                 postData.put("userEmail", email.getText().toString());
                 postData.put("password", AppConsts.getSHA(password.getText().toString()));
+
                 HttpPostAsyncTask task = new HttpPostAsyncTask(postData, new AsyncResponse() {
                     public void processFinish(String output) {
                         try  {
@@ -92,6 +93,7 @@ public class createAccountActivity extends AppCompatActivity {
                 });
                 task.execute(AppConsts.PHP_location + "/Login.php");
                 finish();
+
             }
         });
     }

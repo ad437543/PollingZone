@@ -32,7 +32,7 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
     // This is a function that we are overriding from AsyncTask. It takes Strings as parameters because that is what we defined for the parameters of our async task
     @Override
     protected String doInBackground(String... params) {
-        String response = null;
+        String response = "";
         try {
             // This is getting the url from the string we passed in
             URL url = new URL(params[0]);

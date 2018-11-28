@@ -77,6 +77,7 @@ public class pollCode extends AppCompatActivity {
                     return;
                 }
 
+                /*
                 Map<String, String> postData = new HashMap<>();
                 User u = User.Instance();
                 if(u != null) {
@@ -103,7 +104,9 @@ public class pollCode extends AppCompatActivity {
                 });
                 task.execute(AppConsts.PHP_location + "/GetPoll.php");
                 finish();
+                */
             }
+
         });
     }
 
