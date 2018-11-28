@@ -65,6 +65,7 @@ public class SignInActivity extends AppCompatActivity  {
                 Map<String, String> postData = new HashMap<>();
                 postData.put("userEmail", email.getText().toString());
                 postData.put("password", AppConsts.getSHA(password.getText().toString()));
+                Log.d(AppConsts.TAG,  postData.toString());
                 HttpPostAsyncTask task = new HttpPostAsyncTask(postData, new AsyncResponse() {
                     public void processFinish(String output) {
                         try {
@@ -82,11 +83,11 @@ public class SignInActivity extends AppCompatActivity  {
                                 // TODO: this should redirect to the user dash/ poll code
                                 startActivity(new Intent(SignInActivity.this, GraphActivity.class));
                             }
+                            finish();
                         } catch (JSONException e) {}
                     }
                 });
                 task.execute(AppConsts.PHP_location + "/Login.php");
-                finish();
             }
         });
     }
