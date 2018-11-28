@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fakeimage"
     tools:context=".pollCode">
 
 
@@ -98,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.19"
-        app:srcCompat="@drawable/fakeimage" />
+        app:srcCompat="@drawable/ic_statistical_chart" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

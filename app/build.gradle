@@ -4,6 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.said.pollingzone"
+        vectorDrawables.useSupportLibrary = true
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 1
