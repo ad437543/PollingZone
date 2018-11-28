@@ -21,6 +21,7 @@ public class pollCode extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_poll_code);
         Log.d(AppConsts.TAG, "Anon Pollcode Activity");
 
         User.appStartUp();
