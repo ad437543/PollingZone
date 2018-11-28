@@ -20,9 +20,9 @@ public class createAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_account);
         Log.d(AppConsts.TAG, "Register Activity");
 
-        setContentView(R.layout.activity_create_account);
 
         configureBackToPollCode();
     }

@@ -26,9 +26,10 @@ public class pollCode extends AppCompatActivity {
 
         User.appStartUp();
 
-        configureToCreateActivity();
+
         configureToPollActivity();
         configureToSignIn();
+        configureToCreateActivity();
     }
 
     private void configureToCreateActivity()
@@ -39,6 +40,19 @@ public class pollCode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(pollCode.this, createAccountActivity.class));
+            }
+        });
+    }
+
+
+    private void configureToSignIn()
+    {
+        Button goToSignIn = findViewById(R.id.goToSignIn);
+
+        goToSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(pollCode.this, SignInActivity.class));
             }
         });
     }
@@ -93,7 +107,7 @@ public class pollCode extends AppCompatActivity {
         });
     }
 
-    private void configureToSignIn()
+ /*   private void configureToSignIn()
     {
         Button goToSignIn = findViewById(R.id.goToSignIn);
 
@@ -103,5 +117,5 @@ public class pollCode extends AppCompatActivity {
                 startActivity(new Intent(pollCode.this, SignInActivity.class));
             }
         });
-    }
+    }*/
 }
