@@ -39,10 +39,11 @@ public class createAccountActivity extends AppCompatActivity {
                 EditText email = findViewById(R.id.holdsEmail);
                 EditText firstName = findViewById(R.id.holdsFirstName);
                 EditText lastName = findViewById(R.id.holdsLastName);
+                EditText studentID = findViewById(R.id.holdsStudentID);
 
 
 
-                if(firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty() || email.getText().toString().isEmpty() || confirmPassword.getText().toString().isEmpty() || password.getText().toString().isEmpty())
+                if(firstName.getText().toString().isEmpty() || studentID.getText().toString().isEmpty() || lastName.getText().toString().isEmpty() || email.getText().toString().isEmpty() || confirmPassword.getText().toString().isEmpty() || password.getText().toString().isEmpty())
                 {
                     Toast.makeText(getApplicationContext(),
                             "CAN NOT HAVE BLANK FIELDS",Toast.LENGTH_SHORT).show();
@@ -87,6 +88,9 @@ public class createAccountActivity extends AppCompatActivity {
                                 startActivity(new Intent(createAccountActivity.this, SignInActivity.class));
                             } else {
                                 // TODO: this means there is an error logging in, likely same email
+                                // TODO: see if we can get back an error code for when an email is already taken
+                                Toast.makeText(getApplicationContext(),
+                                        "ACCOUNT COULD NOT BE MADE",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {}
                     }

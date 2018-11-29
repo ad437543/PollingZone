@@ -72,6 +72,8 @@ public class SignInActivity extends AppCompatActivity  {
                             JSONObject data = (JSONObject) new JSONTokener(output).nextValue();
                             String userid = data.getString("id");
                             if(userid.equals("0")) {
+                                Toast.makeText(getApplicationContext(),
+                                        "INVALID USERNAME OR PASSWORD",Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SignInActivity.this, SignInActivity.class));
                             }
                             else {
