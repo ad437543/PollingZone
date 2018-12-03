@@ -71,10 +71,15 @@ public class SignInActivity extends AppCompatActivity  {
                         try {
                             JSONObject data = (JSONObject) new JSONTokener(output).nextValue();
                             String userid = data.getString("id");
+                            EditText password = findViewById(R.id.holdsPassword);
+                            EditText email = findViewById(R.id.holdsEmail);
+
                             if(userid.equals("0")) {
                                 Toast.makeText(getApplicationContext(),
                                         "INVALID USERNAME OR PASSWORD",Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignInActivity.this, SignInActivity.class));
+                                password.setText("");
+                                email.setText("");
+                                return;
                             }
                             else {
                                 String firstName = data.getString("firstName");

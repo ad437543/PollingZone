@@ -43,7 +43,7 @@ public class createAccountActivity extends AppCompatActivity {
 
 
 
-                if(firstName.getText().toString().isEmpty() || studentID.getText().toString().isEmpty() || lastName.getText().toString().isEmpty() || email.getText().toString().isEmpty() || confirmPassword.getText().toString().isEmpty() || password.getText().toString().isEmpty())
+                if(firstName.getText().toString().isEmpty() || lastName.getText().toString().isEmpty() || email.getText().toString().isEmpty() || confirmPassword.getText().toString().isEmpty() || password.getText().toString().isEmpty())
                 {
                     Toast.makeText(getApplicationContext(),
                             "CAN NOT HAVE BLANK FIELDS",Toast.LENGTH_SHORT).show();
@@ -96,6 +96,8 @@ public class createAccountActivity extends AppCompatActivity {
                     }
                 });
                 task.execute(AppConsts.PHP_location + "/Register.php");
+                Toast.makeText(getApplicationContext(),
+                        "ACCOUNT CREATED",Toast.LENGTH_SHORT).show();
                 finish();
 
             }

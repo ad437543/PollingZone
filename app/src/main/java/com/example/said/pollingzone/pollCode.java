@@ -64,7 +64,6 @@ public class pollCode extends AppCompatActivity {
         setContentView(R.layout.activity_poll_code);
 
         Button goToPoll = findViewById(R.id.goToPoll);
-        EditText pollingCode = findViewById(R.id.editPollCode);
 
         goToPoll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,15 +139,4 @@ public class pollCode extends AppCompatActivity {
         });
     }
 
- /*   private void configureToSignIn()
-    {
-        Button goToSignIn = findViewById(R.id.goToSignIn);
-
-        goToSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(pollCode.this, SignInActivity.class));
-            }
-        });
-    }*/
 }
