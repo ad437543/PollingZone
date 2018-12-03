@@ -95,7 +95,7 @@ public class createAccountActivity extends AppCompatActivity {
                         } catch (JSONException e) {}
                     }
                 });
-                task.execute(AppConsts.PHP_location + "/Login.php");
+                task.execute(AppConsts.PHP_location + "/Register.php");
                 finish();
 
             }

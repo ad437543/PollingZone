@@ -3,7 +3,11 @@ import java.util.ArrayList;
 
 public class Poll {
     // Other necessary fields here i.e. poll title, id number ect
-    private String roomId;
+    private String roomID;
+    private String name;
+    private String startTime;
+    private String expireTime;
+    private String owner;
     private ArrayList<Question> questions;
     private int currentQuestion;
 
@@ -12,24 +16,72 @@ public class Poll {
         this.currentQuestion = 0;
     }
 
-    private void addQuestion(String qText, ArrayList<String> qAnswers) {
-        this.questions.add(new Question(qText, qAnswers));
+    public String getRoomId() {
+        return roomID;
     }
 
-    private void answerQuestion(int selectedAnswer) {
+    public void setRoomId(String roomId) {
+        this.roomID = roomId;
+    }
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getExpireTime() {
+        return expireTime;
+    }
+
+    public void setExpireTime(String expireTime) {
+        this.expireTime = expireTime;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void addQuestion(String qText, String questionID, ArrayList<String> qAnswers) {
+        this.questions.add(new Question(qText, questionID, qAnswers));
+    }
+
+    public void answerQuestion(int selectedAnswer) {
         this.questions.get(currentQuestion).answerQuestion(selectedAnswer);
         this.currentQuestion++;
     }
 
-    private String[] getPossibleAnswers(){
+    public String[] getPossibleAnswers(){
         return this.questions.get(this.currentQuestion).getAnswers();
     }
 
-    private String getText() {
+    public String getText() {
         return this.questions.get(this.currentQuestion).getText();
     }
 
-    private int[] getUserAnswers() {
+    public int[] getUserAnswers() {
         int[] answers = new int[this.questions.size()];
         for(int i = 0; i < this.questions.size(); i++) {
             answers[i] = this.questions.get(i).getUserAnswer();
@@ -37,9 +89,9 @@ public class Poll {
         return answers;
     }
 
-
     private class Question {
         private String text;
+        private String questionID;
         private ArrayList<String> possibleAnswers;
         private int userAnswer;
 
@@ -48,8 +100,9 @@ public class Poll {
             this.possibleAnswers = new ArrayList<>();
         }
 
-        private Question(String qText, ArrayList<String> qAnswers) {
+        private Question(String qText, String questionID, ArrayList<String> qAnswers) {
             this.text = qText;
+            this.questionID = questionID;
             this.possibleAnswers = new ArrayList<>();
             this.possibleAnswers.addAll(qAnswers);
             this.userAnswer = -1;
@@ -57,6 +110,14 @@ public class Poll {
 
         private void answerQuestion(int answer) {
             this.userAnswer = answer;
+        }
+
+        public String getQuestionID() {
+            return questionID;
+        }
+
+        public void setQuestionID(String questionID) {
+            this.questionID = questionID;
         }
 
         private String[] getAnswers() {

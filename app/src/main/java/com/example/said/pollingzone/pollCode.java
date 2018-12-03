@@ -9,10 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,7 +79,7 @@ public class pollCode extends AppCompatActivity {
                     return;
                 }
 
-                /*
+
                 Map<String, String> postData = new HashMap<>();
                 User u = User.Instance();
                 if(u != null) {
@@ -92,9 +94,38 @@ public class pollCode extends AppCompatActivity {
                 HttpPostAsyncTask task = new HttpPostAsyncTask(postData, new AsyncResponse() {
                     public void processFinish(String output) {
                         try  {
+                            Poll newPoll = new Poll();
                             JSONObject data = (JSONObject) new JSONTokener(output).nextValue();
+                            newPoll.setRoomId(data.getString("id"));
+                            newPoll.setName(data.getString("title"));
+                            newPoll.setOwner(data.getString("owner"));
+                            newPoll.setStartTime(data.getString("start"));
+                            newPoll.setExpireTime(data.getString("expire"));
+
+                            JSONArray questions = data.getJSONArray("questions");
+                            for(int i = 0; i < questions.length(); i++) {
+                                JSONObject question = questions.getJSONObject(i);
+
+                                ArrayList<String> possibleAnswers = new ArrayList<>();
+                                int choiceCount = Integer.parseInt(question.getString("choiceCount"));
+                                JSONArray choices = question.getJSONArray("choices");
+                                for(int j = 0; j < choiceCount; j++) {
+                                    //  This may not work, needs testing.spo
+                                    possibleAnswers.add(choices.getJSONObject(i).toString());
+                                }
+
+                                    newPoll.addQuestion(
+                                        question.getString("questionText"),
+                                        question.getString("questionID"),
+                                        possibleAnswers
+                                );
+                            }
+
+
                             String error = data.getString("error");
                             if(error.equals("")) {
+                                User user = User.Instance();
+                                user.setActivePoll(newPoll);
                                 startActivity(new Intent(pollCode.this, GraphActivity.class));
                             } else {
                                 // TODO: this means there is an error logging in, likely same email
@@ -104,7 +135,6 @@ public class pollCode extends AppCompatActivity {
                 });
                 task.execute(AppConsts.PHP_location + "/GetPoll.php");
                 finish();
-                */
             }
 
         });
