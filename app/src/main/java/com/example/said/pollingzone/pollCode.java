@@ -120,12 +120,11 @@ public class pollCode extends AppCompatActivity {
                                 );
                             }
 
-
                             String error = data.getString("error");
                             if(error.equals("")) {
                                 User user = User.Instance();
                                 user.setActivePoll(newPoll);
-                                startActivity(new Intent(pollCode.this, QuestionsView.class));
+                                //startActivity(new Intent(pollCode.this, QuestionsView.class));
                             } else {
                                 // TODO: this means there is an error logging in, likely same email
                             }

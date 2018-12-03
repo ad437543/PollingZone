@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class AppConsts {
     public static final String TAG = "PZ_Log";
-    public static final String PHP_location = "http://www.polling.zone/API/";
+    public static final String PHP_location = "https://www.polling.zone/API/";
 
 
     public static String getSHA(String input) {

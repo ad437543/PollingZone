@@ -68,8 +68,7 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
                 response = convertInputStreamToString(inputStream);
                 Log.d(AppConsts.TAG, "response : " + response);
             } else {
-                // Status code is not 200
-                // Do something to handle the error
+                Log.e(AppConsts.TAG, "Status code : " + statusCode);
             }
 
         } catch (Exception e) {
