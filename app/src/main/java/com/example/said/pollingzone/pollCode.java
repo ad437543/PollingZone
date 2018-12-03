@@ -125,7 +125,7 @@ public class pollCode extends AppCompatActivity {
                             if(error.equals("")) {
                                 User user = User.Instance();
                                 user.setActivePoll(newPoll);
-                                startActivity(new Intent(pollCode.this, GraphActivity.class));
+                                startActivity(new Intent(pollCode.this, QuestionsView.class));
                             } else {
                                 // TODO: this means there is an error logging in, likely same email
                             }

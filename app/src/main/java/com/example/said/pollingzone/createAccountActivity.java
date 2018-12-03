@@ -91,6 +91,7 @@ public class createAccountActivity extends AppCompatActivity {
                                 // TODO: see if we can get back an error code for when an email is already taken
                                 Toast.makeText(getApplicationContext(),
                                         "ACCOUNT COULD NOT BE MADE",Toast.LENGTH_SHORT).show();
+                                return;
                             }
                         } catch (JSONException e) {}
                     }
