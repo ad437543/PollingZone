@@ -89,6 +89,9 @@ public class Poll {
         return answers;
     }
 
+    public String pollPosition() {
+        return (this.currentQuestion + 1) + "/" + this.questions.size();
+    }
     private class Question {
         private String text;
         private String questionID;
