@@ -75,7 +75,7 @@ public class createAccountActivity extends AppCompatActivity {
                 Map<String, String> postData = new HashMap<>();
                 postData.put("firstName", firstName.getText().toString());
                 postData.put("lastName", lastName.getText().toString());
-                postData.put("optionalName", "we need this");
+                postData.put("optionalName", studentID.getText().toString());
                 postData.put("userEmail", email.getText().toString());
                 postData.put("password", AppConsts.getSHA(password.getText().toString()));
 
@@ -99,7 +99,7 @@ public class createAccountActivity extends AppCompatActivity {
                 task.execute(AppConsts.PHP_location + "/Register.php");
                 Toast.makeText(getApplicationContext(),
                         "ACCOUNT CREATED",Toast.LENGTH_SHORT).show();
-                finish();
+                // TODO: finish();
 
             }
         });

@@ -90,7 +90,7 @@ public class SignInActivity extends AppCompatActivity  {
                                 // TODO: this should redirect to the user dash/ poll code
                                 startActivity(new Intent(SignInActivity.this, GraphActivity.class));
                             }
-                            finish();
+                            // TODO: finish();
                         } catch (JSONException e) {}
                     }
                 });

@@ -27,8 +27,7 @@ public class pollCode extends AppCompatActivity {
         Log.d(AppConsts.TAG, "Anon Pollcode Activity");
 
         User.appStartUp();
-
-
+        
         configureToPollActivity();
         configureToSignIn();
         configureToCreateActivity();
@@ -93,8 +92,21 @@ public class pollCode extends AppCompatActivity {
                 HttpPostAsyncTask task = new HttpPostAsyncTask(postData, new AsyncResponse() {
                     public void processFinish(String output) {
                         try  {
+
                             Poll newPoll = new Poll();
                             JSONObject data = (JSONObject) new JSONTokener(output).nextValue();
+
+                            String error = data.getString("error");
+                            if(error.equals("")) {
+                                User user = User.Instance();
+                                user.setActivePoll(newPoll);
+                            } else {
+                                Log.d(AppConsts.TAG, "Room not found");
+                                // TODO: room not found
+                                // TODO: set pollcode field to empty
+                                //return;
+                            }
+
                             newPoll.setRoomId(data.getString("id"));
                             newPoll.setName(data.getString("title"));
                             newPoll.setOwner(data.getString("owner"));
@@ -120,19 +132,16 @@ public class pollCode extends AppCompatActivity {
                                 );
                             }
 
-                            String error = data.getString("error");
-                            if(error.equals("")) {
-                                User user = User.Instance();
-                                user.setActivePoll(newPoll);
-                                //startActivity(new Intent(pollCode.this, QuestionsView.class));
-                            } else {
-                                // TODO: this means there is an error logging in, likely same email
-                            }
-                        } catch (JSONException e) {}
+                            startActivity(new Intent(pollCode.this, GraphActivity.class));
+                            // TODO: Start poll activity
+                            // TODO: finish();
+                        } catch (JSONException e) {
+                            Log.e(AppConsts.TAG, e.getLocalizedMessage());
+                        }
                     }
                 });
-                task.execute(AppConsts.PHP_location + "/GetPoll.php");
-                finish();
+                task.execute(AppConsts.PHP_location + "/GetRoomByCode.php");
+
             }
 
         });
