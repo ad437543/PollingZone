@@ -91,7 +91,9 @@ public class SignInActivity extends AppCompatActivity  {
                                 startActivity(new Intent(SignInActivity.this, PollCodeLoggedIn.class));
                             }
                             // TODO: finish();
-                        } catch (JSONException e) {}
+                        } catch (JSONException e) {
+                            Log.e(AppConsts.TAG, e.getLocalizedMessage());
+                        }
                     }
                 });
                 task.execute(AppConsts.PHP_location + "/Login.php");

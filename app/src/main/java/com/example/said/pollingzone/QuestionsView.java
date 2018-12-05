@@ -1,11 +1,18 @@
 package com.example.said.pollingzone;
 
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class QuestionsView extends AppCompatActivity {
 
@@ -17,14 +24,55 @@ public class QuestionsView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer_questions);
 
+        User user = User.Instance();
+        TextView pollName = findViewById(R.id.holdsPollName);
+        pollName.setText(user.getActivePoll().getName());
+
+        TextView questionText = findViewById(R.id.holdsQuestion);
+        questionText.setText(user.getActivePoll().getText());
+
+        TextView questionNumber = findViewById(R.id.holdsQuestionNumber);
+        questionNumber.setText(user.getActivePoll().pollPosition());
+
 
         pressedSubmit();
+
         initImageBitmaps();
     }
     //Todo: press submit adds the new question on to the screen and displays if user got the question right or wrong?
     private void pressedSubmit()
     {
+        Button submit = findViewById(R.id.willSubmit);
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int answer = RecyclerViewAdapter.lastClicked; // TODO: test
+                Log.d(AppConsts.TAG, answer + " was selected");
+                User user = User.Instance();
+                boolean continuePoll = user.answerQuestion(answer);
+
+                if(continuePoll) {
+
+                    TextView questionText = findViewById(R.id.holdsQuestion);
+                    questionText.setText(user.getActivePoll().getText());
+
+                    TextView questionNumber = findViewById(R.id.holdsQuestionNumber);
+                    questionNumber.setText(user.getActivePoll().pollPosition());
+
+                    initImageBitmaps();
+                } else {
+                    // TODO: Redirect to poll results page
+                    Log.d(AppConsts.TAG, "End of Poll");
+                    Log.d(AppConsts.TAG, "User Answers: " + Arrays.toString(user.getActivePoll().getUserAnswers()));
+                    if(user.getUserid().equals("")) {
+                        startActivity(new Intent(QuestionsView.this, pollCode.class));
+                    } else {
+                        startActivity(new Intent(QuestionsView.this, PollCodeLoggedIn.class));
+                    }
+                }
+            }
+        });
     }
 
     private void initImageBitmaps(){
@@ -46,8 +94,15 @@ public class QuestionsView extends AppCompatActivity {
         Letters[14] = "https://cdn.pixabay.com/photo/2017/02/09/11/25/alphabet-2051685__340.png";
         Letters[15] = "https://cdn.pixabay.com/photo/2017/02/09/11/23/alphabet-2051683__340.png";
 
+        mAnswerChoices.clear();
+        String[] answers = User.Instance().getActivePoll().getPossibleAnswers();
+        for(int i = 0; i < answers.length; i++) {
+            mImagesUrls.add(Letters[i]);
+            mAnswerChoices.add(answers[i]);
+        }
 
         //Todo: for loop, for every answer choice, i = 0, i < answerchoices, read from json and add it to mAnswerChoices, and do mImagesUrls.add(Letters[i]);
+        /*
         mImagesUrls.add(Letters[0]);
         mAnswerChoices.add("Answer Choice A");
 
@@ -85,7 +140,7 @@ public class QuestionsView extends AppCompatActivity {
         mAnswerChoices.add("Answer Choice E");
         mImagesUrls.add(Letters[15]);
         mAnswerChoices.add("Answer Choice E");
-
+        */
 
         initRecyclerView();
 

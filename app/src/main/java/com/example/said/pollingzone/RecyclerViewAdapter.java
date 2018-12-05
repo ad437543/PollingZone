@@ -22,6 +22,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
     private Context mContent;
+    public static int lastClicked = 0;
 
     public RecyclerViewAdapter(ArrayList<String> mImages, ArrayList<String> mImagesNames, Context mContent) {
         this.mImages = mImages;
@@ -50,7 +51,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"onClick: clicked on: " + mImageNames.get(i));
-
+                lastClicked = i;
                 Toast.makeText(mContent, mImageNames.get(i), Toast.LENGTH_SHORT).show();
             }
         });

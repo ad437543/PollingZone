@@ -114,7 +114,7 @@ public class pollCode extends AppCompatActivity {
                                     JSONArray choices = question.getJSONArray("choices");
                                     for(int j = 0; j < choiceCount; j++) {
                                         //  This may not work, needs testing.spo
-                                        possibleAnswers.add(choices.getString(i));
+                                        possibleAnswers.add(choices.getString(j));
                                     }
                                         newPoll.addQuestion(
                                             question.getString("questionText"),

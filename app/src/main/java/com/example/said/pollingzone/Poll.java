@@ -70,6 +70,7 @@ public class Poll {
 
     public boolean answerQuestion(String userid, String sessionID, int selectedAnswer) {
 
+
         Map<String, String> postData = new HashMap<>();
         postData.put("userID", userid);
         postData.put("sessionID", sessionID);
@@ -83,12 +84,14 @@ public class Poll {
                     JSONObject data = (JSONObject) new JSONTokener(output).nextValue();
                     String error = data.getString("error");
 
-                    if(error.equals("0")) {
+                    if(error.equals("")) {
                         return;
                     } else {
                         Log.e(AppConsts.TAG, "Error Answering Question : " + error);
                     }
-                } catch (JSONException e) {}
+                } catch (JSONException e) {
+                    Log.e(AppConsts.TAG, e.getLocalizedMessage());
+                }
             }
         });
         task.execute(AppConsts.PHP_location + "/AnswerQuestion.php");

@@ -81,7 +81,7 @@ public class PollCodeLoggedIn extends AppCompatActivity {
                                 User user = User.Instance();
                                 user.setActivePoll(newPoll);
 
-                                newPoll.setRoomId(data.getString("id"));
+                                newPoll.setRoomID(data.getString("id"));
                                 newPoll.setName(data.getString("title"));
                                 newPoll.setOwner(data.getString("owner"));
                                 newPoll.setStartTime(data.getString("start"));
@@ -96,7 +96,7 @@ public class PollCodeLoggedIn extends AppCompatActivity {
                                     JSONArray choices = question.getJSONArray("choices");
                                     for(int j = 0; j < choiceCount; j++) {
                                         //  This may not work, needs testing.spo
-                                        possibleAnswers.add(choices.getString(i));
+                                        possibleAnswers.add(choices.getString(j));
                                     }
                                     newPoll.addQuestion(
                                             question.getString("questionText"),

@@ -96,7 +96,9 @@ public class createAccountActivity extends AppCompatActivity {
                                         "ACCOUNT COULD NOT BE MADE",Toast.LENGTH_SHORT).show();
 
                             }
-                        } catch (JSONException e) {}
+                        } catch (JSONException e) {
+                            Log.e(AppConsts.TAG, e.getLocalizedMessage());
+                        }
                     }
                 });
                 task.execute(AppConsts.PHP_location + "/Register.php");
