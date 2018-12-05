@@ -29,7 +29,6 @@
         <activity android:name=".SignInActivity" />
         <activity android:name=".QuestionsView" />
         <activity android:name=".PollCodeLoggedIn" />
-        <activity android:name=".GraphActivity" />
     </application>
 
 </manifest>

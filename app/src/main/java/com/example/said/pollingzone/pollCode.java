@@ -62,12 +62,12 @@ public class pollCode extends AppCompatActivity {
     {
         setContentView(R.layout.activity_poll_code);
 
-        Button goToPoll = findViewById(R.id.goToPoll);
+        final Button goToPoll = findViewById(R.id.goToPoll);
 
         goToPoll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText pollingCode = findViewById(R.id.editPollCode);
+                final EditText pollingCode = findViewById(R.id.editPollCode);
 
                 if(pollingCode.getText().toString().length() != 6)
                 {
@@ -131,6 +131,10 @@ public class pollCode extends AppCompatActivity {
                                 Log.d(AppConsts.TAG, "Room not found");
                                 // TODO: room not found
                                 // TODO: set pollcode field to empty
+                                pollingCode.setText("");
+                                Toast.makeText(getApplicationContext(),
+                                        "POLLING CODE DOES NOT EXIST",Toast.LENGTH_SHORT).show();
+
                                 //return;
                             }
                         } catch (JSONException e) {
