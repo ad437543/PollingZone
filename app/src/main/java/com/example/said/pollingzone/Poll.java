@@ -1,5 +1,13 @@
 package com.example.said.pollingzone;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Poll {
     // Other necessary fields here i.e. poll title, id number ect
@@ -14,14 +22,6 @@ public class Poll {
     public Poll() {
         this.questions = new ArrayList<>();
         this.currentQuestion = 0;
-    }
-
-    public String getRoomId() {
-        return roomID;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomID = roomId;
     }
 
     public String getRoomID() {
@@ -68,9 +68,36 @@ public class Poll {
         this.questions.add(new Question(qText, questionID, qAnswers));
     }
 
-    public void answerQuestion(int selectedAnswer) {
+    public boolean answerQuestion(String userid, String sessionID, int selectedAnswer) {
+
+        Map<String, String> postData = new HashMap<>();
+        postData.put("userID", userid);
+        postData.put("sessionID", sessionID);
+        postData.put("roomID", this.getRoomID());
+        postData.put("questionID", this.questions.get(currentQuestion).questionID);
+        postData.put("choice", Integer.toString(selectedAnswer));
+
+        HttpPostAsyncTask task = new HttpPostAsyncTask(postData, new AsyncResponse() {
+            public void processFinish(String output) {
+                try {
+                    JSONObject data = (JSONObject) new JSONTokener(output).nextValue();
+                    String error = data.getString("error");
+
+                    if(error.equals("0")) {
+                        return;
+                    } else {
+                        Log.e(AppConsts.TAG, "Error Answering Question : " + error);
+                    }
+                } catch (JSONException e) {}
+            }
+        });
+        task.execute(AppConsts.PHP_location + "/AnswerQuestion.php");
+
         this.questions.get(currentQuestion).answerQuestion(selectedAnswer);
         this.currentQuestion++;
+
+        if(this.currentQuestion == this.questions.size()) return false;
+        else return true;
     }
 
     public String[] getPossibleAnswers(){
