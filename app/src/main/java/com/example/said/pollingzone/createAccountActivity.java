@@ -85,20 +85,22 @@ public class createAccountActivity extends AppCompatActivity {
                             JSONObject data = (JSONObject) new JSONTokener(output).nextValue();
                             String error = data.getString("error");
                             if(error.equals("")) {
-                                startActivity(new Intent(createAccountActivity.this, SignInActivity.class));
+                                Toast.makeText(getApplicationContext(),
+                                        "ACCOUNT CREATED",Toast.LENGTH_SHORT).show();
+                                //startActivity(new Intent(createAccountActivity.this, SignInActivity.class));
+                                finish();
                             } else {
                                 // TODO: this means there is an error logging in, likely same email
                                 // TODO: see if we can get back an error code for when an email is already taken
                                 Toast.makeText(getApplicationContext(),
                                         "ACCOUNT COULD NOT BE MADE",Toast.LENGTH_SHORT).show();
-                                return;
+
                             }
                         } catch (JSONException e) {}
                     }
                 });
                 task.execute(AppConsts.PHP_location + "/Register.php");
-                Toast.makeText(getApplicationContext(),
-                        "ACCOUNT CREATED",Toast.LENGTH_SHORT).show();
+
                 // TODO: finish();
 
             }
