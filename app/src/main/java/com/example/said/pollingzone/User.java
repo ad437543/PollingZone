@@ -79,7 +79,12 @@ public class User {
         this.activePoll = activePoll;
     }
 
-    @Override
+    public boolean answerQuestion(int selectedAnswer) {
+        return this.activePoll.answerQuestion(this.userid, this.sessionID, selectedAnswer);
+    }
+
+
+        @Override
     public String toString() {
         return "User{" +
                 "userid='" + userid + '\'' +

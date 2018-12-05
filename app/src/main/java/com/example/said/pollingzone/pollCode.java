@@ -99,7 +99,7 @@ public class pollCode extends AppCompatActivity {
                                 User user = User.Instance();
                                 user.setActivePoll(newPoll);
 
-                                newPoll.setRoomId(data.getString("id"));
+                                newPoll.setRoomID(data.getString("id"));
                                 newPoll.setName(data.getString("title"));
                                 newPoll.setOwner(data.getString("owner"));
                                 newPoll.setStartTime(data.getString("start"));
