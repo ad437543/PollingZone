@@ -28,7 +28,7 @@ public class QuestionsView extends AppCompatActivity {
 
         pressedSubmit();
     }
-
+    //Todo: press submit adds the new question on to the screen and displays if user got the question right or wrong?
     private void pressedSubmit()
     {
 
