@@ -123,8 +123,8 @@ public class pollCode extends AppCompatActivity {
                                     );
                                 }
                                 Log.d(AppConsts.TAG, newPoll.toString());
-                                startActivity(new Intent(pollCode.this, GraphActivity.class));
-                                // TODyO: Start poll activit
+                                startActivity(new Intent(pollCode.this, QuestionsView.class));
+                                // TODyO: Start poll activity
                                 // TODO: finish();
 
                             } else {

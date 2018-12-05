@@ -27,6 +27,7 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".createAccountActivity" />
         <activity android:name=".SignInActivity" />
+        <activity android:name=".QuestionsView" />
         <activity android:name=".PollCodeLoggedIn" />
         <activity android:name=".GraphActivity" />
     </application>
