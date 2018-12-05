@@ -88,7 +88,7 @@ public class SignInActivity extends AppCompatActivity  {
                                 User u = User.Instance(userid, sessionID, firstName,lastName);
                                 Log.i(AppConsts.TAG, "User Created : " + u.toString());
                                 // TODO: this should redirect to the user dash/ poll code
-                                startActivity(new Intent(SignInActivity.this, GraphActivity.class));
+                                startActivity(new Intent(SignInActivity.this, PollCodeLoggedIn.class));
                             }
                             // TODO: finish();
                         } catch (JSONException e) {}
