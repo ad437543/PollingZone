@@ -11,11 +11,19 @@ public class User {
     public static User Instance(String userid, String session, String firstName, String lastName) {
         if(instance == null) {
             instance = new User(userid, session, firstName, lastName);
+        } else {
+            instance.setUserid(userid);
+            instance.setFirstName(firstName);
+            instance.setLastName(lastName);
+            instance.setSessionID(session);
         }
         return instance;
     }
 
     public static User Instance() {
+        if(instance == null) {
+            instance = new User("", "", "", "");
+        }
         return instance;
     }
 

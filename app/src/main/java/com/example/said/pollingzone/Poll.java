@@ -92,6 +92,21 @@ public class Poll {
     public String pollPosition() {
         return (this.currentQuestion + 1) + "/" + this.questions.size();
     }
+
+
+    @Override
+    public String toString() {
+        return "Poll{" +
+                "roomID='" + roomID + '\'' +
+                ", name='" + name + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", expireTime='" + expireTime + '\'' +
+                ", owner='" + owner + '\'' +
+                ", questions=" + questions +
+                ", currentQuestion=" + currentQuestion +
+                '}';
+    }
+
     private class Question {
         private String text;
         private String questionID;
@@ -135,6 +150,16 @@ public class Poll {
 
         private int getUserAnswer() {
             return this.userAnswer;
+        }
+
+        @Override
+        public String toString() {
+            return "Question{" +
+                    "text='" + text + '\'' +
+                    ", questionID='" + questionID + '\'' +
+                    ", possibleAnswers=" + possibleAnswers +
+                    ", userAnswer=" + userAnswer +
+                    '}';
         }
     }
 }

@@ -67,6 +67,7 @@ public class HttpPostAsyncTask extends AsyncTask<String, Void, String> {
 
                 response = convertInputStreamToString(inputStream);
                 Log.d(AppConsts.TAG, "response : " + response);
+                Log.d(AppConsts.TAG, "Status code : " + statusCode);
             } else {
                 Log.e(AppConsts.TAG, "Status code : " + statusCode);
             }

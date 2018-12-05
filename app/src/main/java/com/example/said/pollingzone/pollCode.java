@@ -82,68 +82,64 @@ public class pollCode extends AppCompatActivity {
                 User u = User.Instance();
                 if(u != null) {
                     postData.put("userID", u.getUserid());
-                    postData.put("sessionID", u.getSessionID());
+                    postData.put("sessionKey", u.getSessionID());
                 } else {
                     postData.put("userID", "");
-                    postData.put("sessionID", "");
+                    postData.put("sessionKey", "");
                 }
                 postData.put("roomCode", pollingCode.getText().toString());
 
                 HttpPostAsyncTask task = new HttpPostAsyncTask(postData, new AsyncResponse() {
                     public void processFinish(String output) {
                         try  {
-
                             Poll newPoll = new Poll();
                             JSONObject data = (JSONObject) new JSONTokener(output).nextValue();
-
                             String error = data.getString("error");
                             if(error.equals("")) {
                                 User user = User.Instance();
                                 user.setActivePoll(newPoll);
+
+                                newPoll.setRoomId(data.getString("id"));
+                                newPoll.setName(data.getString("title"));
+                                newPoll.setOwner(data.getString("owner"));
+                                newPoll.setStartTime(data.getString("start"));
+                                newPoll.setExpireTime(data.getString("expire"));
+
+                                JSONArray questions = data.getJSONArray("questions");
+                                for(int i = 0; i < questions.length(); i++) {
+                                    JSONObject question = questions.getJSONObject(i);
+
+                                    ArrayList<String> possibleAnswers = new ArrayList<>();
+                                    int choiceCount = Integer.parseInt(question.getString("choiceCount"));
+                                    JSONArray choices = question.getJSONArray("choices");
+                                    for(int j = 0; j < choiceCount; j++) {
+                                        //  This may not work, needs testing.spo
+                                        possibleAnswers.add(choices.getString(i));
+                                    }
+                                        newPoll.addQuestion(
+                                            question.getString("questionText"),
+                                            question.getString("questionID"),
+                                            possibleAnswers
+                                    );
+                                }
+                                Log.d(AppConsts.TAG, newPoll.toString());
+                                startActivity(new Intent(pollCode.this, GraphActivity.class));
+                                // TODyO: Start poll activit
+                                // TODO: finish();
+
                             } else {
                                 Log.d(AppConsts.TAG, "Room not found");
                                 // TODO: room not found
                                 // TODO: set pollcode field to empty
                                 //return;
                             }
-
-                            newPoll.setRoomId(data.getString("id"));
-                            newPoll.setName(data.getString("title"));
-                            newPoll.setOwner(data.getString("owner"));
-                            newPoll.setStartTime(data.getString("start"));
-                            newPoll.setExpireTime(data.getString("expire"));
-
-                            JSONArray questions = data.getJSONArray("questions");
-                            for(int i = 0; i < questions.length(); i++) {
-                                JSONObject question = questions.getJSONObject(i);
-
-                                ArrayList<String> possibleAnswers = new ArrayList<>();
-                                int choiceCount = Integer.parseInt(question.getString("choiceCount"));
-                                JSONArray choices = question.getJSONArray("choices");
-                                for(int j = 0; j < choiceCount; j++) {
-                                    //  This may not work, needs testing.spo
-                                    possibleAnswers.add(choices.getJSONObject(i).toString());
-                                }
-
-                                    newPoll.addQuestion(
-                                        question.getString("questionText"),
-                                        question.getString("questionID"),
-                                        possibleAnswers
-                                );
-                            }
-
-                            startActivity(new Intent(pollCode.this, GraphActivity.class));
-                            // TODO: Start poll activity
-                            // TODO: finish();
                         } catch (JSONException e) {
                             Log.e(AppConsts.TAG, e.getLocalizedMessage());
                         }
                     }
                 });
                 task.execute(AppConsts.PHP_location + "/GetRoomByCode.php");
-
             }
-
         });
     }
 
