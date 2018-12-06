@@ -52,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         viewHolder.imageName.setText(mImageNames.get(i));
 
         if(lastClicked == i)
-            viewHolder.itemView.setBackgroundColor(Color.parseColor("#00ff99"));
+            viewHolder.itemView.setBackgroundColor(Color.parseColor("#008577"));
         else
             viewHolder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
 
