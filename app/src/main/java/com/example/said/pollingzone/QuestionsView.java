@@ -49,33 +49,42 @@ public class QuestionsView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int answer = RecyclerViewAdapter.lastClicked; // TODO: test
-                Log.d(AppConsts.TAG, answer + " was selected");
-                User user = User.Instance();
-                boolean continuePoll = user.answerQuestion(answer);
+                    if(answer >= 0) {
+                        Log.d(AppConsts.TAG, answer + " was selected");
+                        User user = User.Instance();
+                        boolean continuePoll = user.answerQuestion(answer);
 
-                if(continuePoll) {
+                        RecyclerViewAdapter.lastClicked = -1;
+                        ((RecyclerView) findViewById(R.id.recycler_view)).getAdapter().notifyDataSetChanged();
 
-                    TextView questionText = findViewById(R.id.holdsQuestion);
-                    questionText.setText(user.getActivePoll().getText());
+                        if (continuePoll) {
 
-                    TextView questionNumber = findViewById(R.id.holdsQuestionNumber);
-                    questionNumber.setText(user.getActivePoll().pollPosition());
+                            TextView questionText = findViewById(R.id.holdsQuestion);
+                            questionText.setText(user.getActivePoll().getText());
 
-                    initImageBitmaps();
-                } else {
-                    // TODO: Redirect to poll results page
-                    Log.d(AppConsts.TAG, "End of Poll");
-                    Log.d(AppConsts.TAG, "User Answers: " + Arrays.toString(user.getActivePoll().getUserAnswers()));
+                            TextView questionNumber = findViewById(R.id.holdsQuestionNumber);
+                            questionNumber.setText(user.getActivePoll().pollPosition());
 
-                    Toast.makeText(getApplicationContext(),
-                            "POLL COMPLETED",Toast.LENGTH_SHORT).show();
 
-                    if(user.getUserid().equals("")) {
-                        startActivity(new Intent(QuestionsView.this, pollCode.class));
+                            initImageBitmaps();
+                        } else {
+                            // TODO: Redirect to poll results page
+                            Log.d(AppConsts.TAG, "End of Poll");
+                            Log.d(AppConsts.TAG, "User Answers: " + Arrays.toString(user.getActivePoll().getUserAnswers()));
+
+                            Toast.makeText(getApplicationContext(),
+                                    "POLL COMPLETED", Toast.LENGTH_SHORT).show();
+
+                            if (user.getUserid().equals("")) {
+                                startActivity(new Intent(QuestionsView.this, pollCode.class));
+                            } else {
+                                startActivity(new Intent(QuestionsView.this, PollCodeLoggedIn.class));
+                            }
+                        }
                     } else {
-                        startActivity(new Intent(QuestionsView.this, PollCodeLoggedIn.class));
+                        Toast.makeText(getApplicationContext(),
+                                "Answer Required", Toast.LENGTH_SHORT).show();
                     }
-                }
             }
         });
     }
