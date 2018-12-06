@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,6 +66,10 @@ public class QuestionsView extends AppCompatActivity {
                     // TODO: Redirect to poll results page
                     Log.d(AppConsts.TAG, "End of Poll");
                     Log.d(AppConsts.TAG, "User Answers: " + Arrays.toString(user.getActivePoll().getUserAnswers()));
+
+                    Toast.makeText(getApplicationContext(),
+                            "POLL COMPLETED",Toast.LENGTH_SHORT).show();
+
                     if(user.getUserid().equals("")) {
                         startActivity(new Intent(QuestionsView.this, pollCode.class));
                     } else {

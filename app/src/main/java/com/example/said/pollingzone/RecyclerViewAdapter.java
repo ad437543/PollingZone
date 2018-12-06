@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -40,7 +42,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull  ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called");
 
         Glide.with(mContent).asBitmap().load(mImages.get(i)).into(viewHolder.image);
@@ -53,6 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d(TAG,"onClick: clicked on: " + mImageNames.get(i));
                 lastClicked = i;
                 Toast.makeText(mContent, mImageNames.get(i), Toast.LENGTH_SHORT).show();
+
             }
         });
     }

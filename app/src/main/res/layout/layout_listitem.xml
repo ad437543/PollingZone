@@ -3,7 +3,8 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp">
+    android:padding="15dp"
+    >
 
 
     <de.hdodenhof.circleimageview.CircleImageView
