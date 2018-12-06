@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Color;
 
 import com.bumptech.glide.Glide;
 
@@ -24,7 +25,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
     private Context mContent;
-    public static int lastClicked = 0;
+    public static int lastClicked = -1;
 
     public RecyclerViewAdapter(ArrayList<String> mImages, ArrayList<String> mImagesNames, Context mContent) {
         this.mImages = mImages;
@@ -38,6 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem, viewGroup, false );
         ViewHolder holder = new ViewHolder(view);
+
         return holder;
     }
 
@@ -49,11 +51,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         viewHolder.imageName.setText(mImageNames.get(i));
 
+        if(lastClicked == i)
+            viewHolder.itemView.setBackgroundColor(Color.parseColor("#00ff99"));
+        else
+            viewHolder.itemView.setBackgroundColor(Color.parseColor("#ffffff"));
+
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"onClick: clicked on: " + mImageNames.get(i));
                 lastClicked = i;
+                notifyDataSetChanged();
                 Toast.makeText(mContent, mImageNames.get(i), Toast.LENGTH_SHORT).show();
 
             }
