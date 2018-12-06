@@ -62,8 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d(TAG,"onClick: clicked on: " + mImageNames.get(i));
                 lastClicked = i;
                 notifyDataSetChanged();
-                Toast.makeText(mContent, mImageNames.get(i), Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(mContent, mImageNames.get(i), Toast.LENGTH_SHORT).show();
             }
         });
     }
